@@ -1,0 +1,46 @@
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p id="demo"></p>
+<h1>Title</h1>
+<p id="parser"></p>
+
+<h1>Completed</h1>
+<p id="completed"></p>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+	  
+	  var obj = JSON.parse(this.responseText);
+	  document.getElementById("parser").innerHTML = obj.title;
+	  
+	  document.getElementById("completed").innerHTML = obj.completed;
+	  
+	  
+    }
+  };
+  xhttp.open("GET", "https://jsonplaceholder.typicode.com/todos/1", true);
+  xhttp.send();
+}
+</script>
+
+
+
+</body>
+
+</html>
